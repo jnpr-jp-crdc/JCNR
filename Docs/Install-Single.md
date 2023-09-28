@@ -1,4 +1,4 @@
-# JCNR Install 手順
+# JCNR Install (Single Kubernetes Node)手順
 - 本手順はKVM上にRHEL VMを1デプロイし、Single Node Kubernetes Clusterを構築し、JCNRをインストールする手順となります。
 - 本手順はJCNR 23.2をベースとしたインストール手順となります。
 

@@ -391,7 +391,7 @@ metadata:
 kubectl apply -f helmchart/cRPD_examples/node-annotation.yaml
 ```
 
-#### JCNR Custom Config File
+### JCNR Custom Config File
 - Node Annotationで指定したパラメータを元に、JCNRデプロイ時に設定する初期Configuration
 - CalicoがBGP 179 Portを使用しているため、JCNRで使用するBGP Portは178に設定
 helmchart/charts/jcnr-cni/files/jcnr-cni-custom-config.tmpl
@@ -492,7 +492,7 @@ helmchart/charts/jcnr-cni/files/jcnr-cni-custom-config.tmpl
     }
 ```
 
-#### JCNR デプロイ
+### JCNR デプロイ
 ```
 helm install jcnr .
 ```
@@ -520,7 +520,7 @@ kube-system        kube-scheduler-jcnr1                       1/1     Running   
 tigera-operator    tigera-operator-866558f9c-slw8m            1/1     Running   5 (26h ago)   26h
 ```
 
-#### JCNR Login方法
+### JCNR Login方法
 cRPD Login
 ```
 kubectl exec -n jcnr -it kube-crpd-worker-sts-XXXX -- bash

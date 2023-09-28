@@ -1,6 +1,7 @@
 # JCNR Install (Multi Worker Node Kubernetes Cluster)手順
 - 本手順はKVM上にRHEL VMを3台デプロイし、Multi Worker Node Kubernetes Clusterを構築し、JCNRをインストールする手順となります。
 - 本手順はJCNR 23.2をベースとしたインストール手順となります。
+- JCNR Master NodeがBGP RRとなる
 
 ## 環境
 Hypervisor: 
@@ -15,7 +16,9 @@ JCNR VM:
 - Helm : 3.9.x
 - Container-RT : Docker CE 20.10.11
 - UIO Driver : VFIO-PCI
-- NIC: ens3(Management), ens4(L3 Interface), ens5(L2 Interface)
+- Master NIC: ens3：１７２．２７．１１５．２０６/22(Management), ens4：192.168.0.1/24(L3 Interface), ens5:none(L2 Interface)
+- Worker1 NIC: ens3：１７２．２７．１１５．２０7/22(Management), ens4：192.168.0.2/24(L3 Interface), ens5:none(L2 Interface)
+- Worker2 NIC: ens3：１７２．２７．１１５．２０8/22(Management), ens4：192.168.0.3/24(L3 Interface), ens5:none(L2 Interface)
 
 
 ## KVM 設定
@@ -384,6 +387,7 @@ metadata:
   annotations:
     jcnr.juniper.net/params: '{
         "isoLoopbackAddr": "49.0004.1000.0000.0001.00",
+        "ClusterID": "1.1.1.1",
         "IPv4LoopbackAddr": "1.1.1.1",
         "srIPv4NodeIndex": "2001",
         "srIPv6NodeIndex": "3001",
@@ -497,6 +501,9 @@ helmchart/charts/jcnr-cni/files/jcnr-cni-custom-config.tmpl
                 bgp {
                     group jcnrbgp1 {
                         type internal;
+                        {{if .Node.ClusterID}}
+                        cluster {{.Node.ClusterID}}
+                        {{end}}
                         local-address {{.Node.IPv4LoopbackAddr}};
                         local-as {{.Node.BGPLocalAsn}};
                         neighbor {{.Node.BGPIPv4Neighbor}};
@@ -530,26 +537,38 @@ helm install jcnr .
 ```
 全てのPodがRunniningになっていることを確認
 ```
-[root@jcnr1 ]# kubectl get pods -A
-NAMESPACE          NAME                                       READY   STATUS    RESTARTS      AGE
-calico-apiserver   calico-apiserver-f894c7976-mqr45           1/1     Running   1 (26h ago)   26h
-calico-apiserver   calico-apiserver-f894c7976-xglq7           1/1     Running   1 (26h ago)   26h
-calico-system      calico-kube-controllers-7c594948b5-nqb97   1/1     Running   1 (26h ago)   26h
-calico-system      calico-node-6vnhl                          1/1     Running   1 (26h ago)   26h
-calico-system      calico-typha-c8c57669b-gbsnv               1/1     Running   2 (26h ago)   26h
-contrail-deploy    contrail-k8s-deployer-74f787b6c6-zcmmq     1/1     Running   0             7h43m
-contrail           contrail-vrouter-masters-whtqr             3/3     Running   0             7h42m
-jcnr               kube-crpd-worker-sts-0                     1/1     Running   0             7h43m
-jcnr               syslog-ng-b2c86                            1/1     Running   0             7h43m
-kube-system        coredns-78fcd69978-6qwbp                   1/1     Running   1 (26h ago)   26h
-kube-system        coredns-78fcd69978-mctk8                   1/1     Running   1 (26h ago)   26h
-kube-system        etcd-jcnr1                                 1/1     Running   1 (26h ago)   26h
-kube-system        kube-apiserver-jcnr1                       1/1     Running   1 (26h ago)   26h
-kube-system        kube-controller-manager-jcnr1              1/1     Running   4 (26h ago)   26h
-kube-system        kube-multus-ds-vvgh4                       1/1     Running   1 (26h ago)   26h
-kube-system        kube-proxy-95wj6                           1/1     Running   1 (26h ago)   26h
-kube-system        kube-scheduler-jcnr1                       1/1     Running   4 (26h ago)   26h
-tigera-operator    tigera-operator-866558f9c-slw8m            1/1     Running   5 (26h ago)   26h
+[root@jcnr-master ~]# kubectl get pods -A
+NAMESPACE          NAME                                       READY   STATUS    RESTARTS        AGE
+calico-apiserver   calico-apiserver-bd5c44b7b-pkwgg           1/1     Running   12              69d
+calico-apiserver   calico-apiserver-bd5c44b7b-rsbtb           1/1     Running   12 (56d ago)    69d
+calico-system      calico-kube-controllers-7c594948b5-wnnpk   1/1     Running   12 (56d ago)    69d
+calico-system      calico-node-fqpbn                          1/1     Running   12 (2d8h ago)   69d
+calico-system      calico-node-vhgc4                          1/1     Running   14 (2d8h ago)   69d
+calico-system      calico-node-vnrh2                          1/1     Running   15 (2d8h ago)   69d
+calico-system      calico-typha-85565bbd56-wx99m              1/1     Running   11 (56d ago)    69d
+calico-system      calico-typha-85565bbd56-xz275              1/1     Running   17 (56d ago)    69d
+contrail-deploy    contrail-k8s-deployer-74f787b6c6-qk6nn     1/1     Running   0               30h
+contrail           contrail-vrouter-masters-vvjcx             3/3     Running   0               30h
+contrail           contrail-vrouter-nodes-97f97               3/3     Running   0               30h
+contrail           contrail-vrouter-nodes-s5sgq               3/3     Running   0               30h
+jcnr               kube-crpd-worker-sts-0                     1/1     Running   0               30h
+jcnr               kube-crpd-worker-sts-1                     1/1     Running   0               30h
+jcnr               kube-crpd-worker-sts-2                     1/1     Running   0               30h
+jcnr               syslog-ng-5nd8m                            1/1     Running   0               30h
+jcnr               syslog-ng-8pdpw                            1/1     Running   0               30h
+kube-system        coredns-78fcd69978-gsmr5                   1/1     Running   10 (56d ago)    69d
+kube-system        coredns-78fcd69978-rpmjt                   1/1     Running   10 (56d ago)    69d
+kube-system        etcd-jcnr-master                           1/1     Running   11 (56d ago)    69d
+kube-system        kube-apiserver-jcnr-master                 1/1     Running   13 (56d ago)    69d
+kube-system        kube-controller-manager-jcnr-master        1/1     Running   17 (2d8h ago)   69d
+kube-system        kube-multus-ds-2jpv2                       1/1     Running   10 (56d ago)    69d
+kube-system        kube-multus-ds-j9m2n                       1/1     Running   10 (56d ago)    69d
+kube-system        kube-multus-ds-mpkcj                       1/1     Running   10 (56d ago)    69d
+kube-system        kube-proxy-4mh62                           1/1     Running   10 (56d ago)    69d
+kube-system        kube-proxy-llgr6                           1/1     Running   11 (56d ago)    69d
+kube-system        kube-proxy-twk6l                           1/1     Running   10              69d
+kube-system        kube-scheduler-jcnr-master                 1/1     Running   17 (2d8h ago)   69d
+tigera-operator    tigera-operator-866558f9c-8ksht            1/1     Running   27 (2d8h ago)   69d
 ```
 
 ### JCNR Login方法

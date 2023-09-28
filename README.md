@@ -3,4 +3,4 @@
 
 
 # チュートリアル
-- [JCNR Install](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/install.md)
+- [JCNR Install](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Install.md)

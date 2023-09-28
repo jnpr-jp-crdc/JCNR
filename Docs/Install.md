@@ -1,11 +1,27 @@
-# Allowed Address Pair
-- Allowed Address Pair(VIP)をPODに付与
-- Address Modeとして以下の2つを設定可能
-  - active-active: VIPへのアクセスはECMPにより分散
-  - active-standby: VRRP
+# JCNR Install Step
+- 本手順はKVM上にRHELをデプロイし、Single Node Kubernetes Clusterを構築し、JCNRをインストールするStepとなります。
 
-<img src="https://github.com/jnpr-jp-crdc/CN2/blob/main/Docs/Images/AllowedAddressPair.png" width="50%">
+## KVM 設定
+### HugePage 設定
+mkdir /dev/hugepages1G
+mount -t hugetlbfs -o pagesize=1G none /dev/hugepages1G
+echo 32 > /sys/devices/system/node/node1/hugepages/hugepages-1048576kB/nr_hugepages
+echo 32 > /sys/devices/system/node/node0/hugepages/hugepages-1048576kB/nr_hugepages
 
-[Allowed Address Pair sample yaml](https://github.com/jnpr-jp-crdc/CN2/blob/main/Manifests/AllowedAddressPair.yaml)
+mount -t hugetlbfs -o pagesize=1G none /dev/hugepages1G
 
-[Keepalived sample config](https://github.com/jnpr-jp-crdc/CN2/blob/main/Manifests/AAP-Keepalived.conf)
+vi /etc/fstab
+---
+none /dev/hugepages1G hugetlbfs pagesize=1G,size=32G 0 0
+---
+
+vi /etc/libvirt/qemu.conf
+---
+hugetlbfs_mount = "/dev/hugepages1G"
+---
+
+vi /etc/default/qemu-kvm
+---
+KVM_HUGEPAGES=1
+---
+

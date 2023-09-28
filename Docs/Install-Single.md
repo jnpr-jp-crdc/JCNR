@@ -235,7 +235,7 @@ systemctl daemon-reload
 systemctl enable --now docker
 ```
 
-### Kubernetesインストール
+### Kubeletインストール
 ```
 cat <<EOF > /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
@@ -254,6 +254,8 @@ yum install -y kubelet-1.22.4 kubeadm-1.22.4 kubectl-1.22.4 --disableexcludes=ku
 systemctl enable --now kubelet
 systemctl restart kubelet
 ```
+
+### Kubernetesデプロイ
 ```
 kubeadm init --pod-network-cidr=172.30.0.0/16 --service-cidr=172.31.0.0/16
 ```
@@ -376,7 +378,7 @@ helmchart/cRPD_examples/node-annotation.yaml
 apiVersion: v1
 kind: Node
 metadata:
-  name: jcnr-master
+  name: jcnr1
   annotations:
     jcnr.juniper.net/params: '{
         "isoLoopbackAddr": "49.0004.1000.0000.0001.00",

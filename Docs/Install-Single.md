@@ -15,8 +15,9 @@ JCNR VM:
 - Helm : 3.9.x
 - Container-RT : Docker CE 20.10.11
 - UIO Driver : VFIO-PCI
-- NIC: ens3：１７２．２７．１１５．12/22(Management), ens4：192.168.0.1/24(L3 Interface), ens5:none(L2 Interface)
+- NIC: ens3：172.27.115.12(Management), ens4：192.168.0.1/24(L3 Interface), ens5:none(L2 Interface)
 
+※JCNRはNICをL2,L3 Modeのどちらで動作させるかを選択できます。必要数に応じてNICを追加してください。
 
 ## KVM 設定
 ### HugePage 設定

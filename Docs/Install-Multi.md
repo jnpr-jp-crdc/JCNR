@@ -20,6 +20,7 @@ JCNR VM:
 - Worker1 NIC: ens3：１７２．２７．１１５．２０7/22(Management), ens4：192.168.0.2/24(L3 Interface), ens5:none(L2 Interface)
 - Worker2 NIC: ens3：１７２．２７．１１５．２０8/22(Management), ens4：192.168.0.3/24(L3 Interface), ens5:none(L2 Interface)
 
+※JCNRはNICをL2,L3 Modeのどちらで動作させるかを選択できます。必要数に応じてNICを追加してください。
 
 ## KVM 設定
 ### HugePage 設定

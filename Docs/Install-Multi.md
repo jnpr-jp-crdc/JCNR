@@ -16,9 +16,9 @@ JCNR VM:
 - Helm : 3.9.x
 - Container-RT : Docker CE 20.10.11
 - UIO Driver : VFIO-PCI
-- Master NIC: ens3：１７２．２７．１１５．２０６/22(Management), ens4：192.168.0.1/24(L3 Interface), ens5:none(L2 Interface)
-- Worker1 NIC: ens3：１７２．２７．１１５．２０7/22(Management), ens4：192.168.0.2/24(L3 Interface), ens5:none(L2 Interface)
-- Worker2 NIC: ens3：１７２．２７．１１５．２０8/22(Management), ens4：192.168.0.3/24(L3 Interface), ens5:none(L2 Interface)
+- Master NIC: ens3：172.27.115.206/22(Management), ens4：192.168.0.1/24(L3 Interface), ens5:none(L2 Interface)
+- Worker1 NIC: ens3：172.27.115.207/22(Management), ens4：192.168.0.2/24(L3 Interface), ens5:none(L2 Interface)
+- Worker2 NIC: ens3：172.27.115.208/22(Management), ens4：192.168.0.3/24(L3 Interface), ens5:none(L2 Interface)
 
 ※JCNRはNICをL2,L3 Modeのどちらで動作させるかを選択できます。必要数に応じてNICを追加してください。
 

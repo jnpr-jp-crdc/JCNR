@@ -331,7 +331,7 @@ helmchart/values.yaml
 global:
   fabricInterface:
   # L2L3
-  - eth4:
+  - ens4:
       ddp: "off"
   - ens5:
       ddp: "off" 

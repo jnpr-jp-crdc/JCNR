@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vrouter1-pod2
+  annotations:
+    k8s.v1.cni.cncf.io/networks: |
+      [
+        {
+          "name": "vrouter1",
+          "interface":"mynet10",
+          "cni-args": {
+            "interfaceType":"veth"
+          }
+        }
+      ]
+spec:
+  containers:
+  - name: vrouter1-pod2
+    image: docker.io/centos
+    command: [ "/bin/bash", "-c" ]
+    args:
+      - ip route del default;
+        ip route add default via 10.0.0.1;
+        sleep infinity;
+    securityContext:
+      privileged: true
+      capabilities:
+        add:
+          - NET_ADMIN

@@ -69,6 +69,7 @@ Annotations:  cni.projectcalico.org/containerID: 702595e6eb2f05aaf5ca0b79c7fcc33
 Status:       Running
 --- snip ---
 ```
+```
 [root@vrouter1-pod1 /]# ip a
 --- snip ---
 84: mynet10@if85: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default

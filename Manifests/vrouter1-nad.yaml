@@ -22,7 +22,17 @@ spec:
                 "subnet": "10.0.0.0/24",
                 "gateway": "10.0.0.1"
               }
+            ],
+            [
+              {
+                "subnet": "abcd::10.0.0.0/120",
+                "gateway": "abcd::10.0.0.1"
+              }
             ]
+          ],
+          "routes": [
+            {"dst": "20.0.0.0/24", "gw": "10.0.0.1"},
+            {"dst": "abcd::20.0.0.0/120", "gw": "abcd::10.0.0.1"}
           ]
         },
         "kubeConfig":"/etc/kubernetes/kubelet.conf"

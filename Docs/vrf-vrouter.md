@@ -41,7 +41,7 @@ Annotations:  cni.projectcalico.org/containerID: 702595e6eb2f05aaf5ca0b79c7fcc33
                 [{
                     "name": "k8s-pod-network",
                     "ips": [
-                        "172.30.79.46"
+                        "172.30.79.52"
                     ],
                     "default": true,
                     "dns": {}
@@ -49,9 +49,10 @@ Annotations:  cni.projectcalico.org/containerID: 702595e6eb2f05aaf5ca0b79c7fcc33
                     "name": "default/vrouter1",
                     "interface": "mynet10",
                     "ips": [
-                        "10.0.0.5"
+                        "10.0.0.8",
+                        "abcd::a00:3"
                     ],
-                    "mac": "02:00:00:D5:C8:DD",
+                    "mac": "02:00:00:BF:B7:7F",
                     "dns": {}
                 }]
               k8s.v1.cni.cncf.io/networks:
@@ -67,3 +68,29 @@ Annotations:  cni.projectcalico.org/containerID: 702595e6eb2f05aaf5ca0b79c7fcc33
 Status:       Running
 --- snip ---
 ```
+[root@vrouter1-pod1 /]# ip a
+--- snip ---
+84: mynet10@if85: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default
+    link/ether 02:00:00:bf:b7:7f brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 10.0.0.8/24 brd 10.0.0.255 scope global mynet10
+       valid_lft forever preferred_lft forever
+    inet6 abcd::a00:3/120 scope global
+       valid_lft forever preferred_lft forever
+    inet6 fe80::ff:febf:b77f/64 scope link
+       valid_lft forever preferred_lft forever
+
+[root@vrouter1-pod1 /]# ip route
+default via 169.254.1.1 dev eth0
+10.0.0.0/24 via 10.0.0.1 dev mynet10
+10.0.0.1 dev mynet10 scope link
+20.0.0.0/24 via 10.0.0.1 dev mynet10
+169.254.1.1 dev eth0 scope link
+
+[root@vrouter1-pod1 /]# ip -6 route
+abcd::a00:1 dev mynet10 metric 1024 pref medium
+abcd::a00:0/120 via abcd::a00:1 dev mynet10 metric 1024 pref medium
+abcd::1400:0/120 via abcd::a00:1 dev mynet10 metric 1024 pref medium
+fe80::/64 dev eth0 proto kernel metric 256 pref medium
+fe80::/64 dev mynet10 proto kernel metric 256 pref medium
+```
+

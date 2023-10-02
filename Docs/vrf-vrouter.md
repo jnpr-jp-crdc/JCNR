@@ -26,6 +26,7 @@
 #### Pod Interface
 - Secondary InterfaceにVRFが接続される
 - IP AddressはNADで指定した方式に従い払い出される
+- NADで指定したRouteがStatic Routeとして反映される
 ```
 # kubectl describe pod vrouter1-pod1
 Name:         vrouter1-pod1

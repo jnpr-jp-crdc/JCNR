@@ -432,6 +432,9 @@ groups {
         protocols {
             isis {
                 interface all;
+                interface ens3 {
+                    disable;
+                }
                 {{if and .Env.SRGB_START_LABEL .Env.SRGB_INDEX_RANGE}}
                 source-packet-routing {
                     srgb start-label {{.Env.SRGB_START_LABEL}} index-range {{.Env.SRGB_INDEX_RANGE}};
@@ -449,9 +452,15 @@ groups {
             }
             ldp {
                 interface all;
+                interface ens3 {
+                    disable;
+                }
             }
             mpls {
                 interface all;
+                interface ens3 {
+                    disable;
+                }
             }
         }
         policy-options {

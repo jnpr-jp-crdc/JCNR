@@ -121,3 +121,6 @@ vif0/6      Ethernet: jvknet1-6103a34 NH: 19 MTU: 9160
             Drops:45
             TX port   packets:2 errors:0
 ```
+
+## VRF Lite - Pod Vlan Trunk
+<img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-vrouter2.png" width=400>

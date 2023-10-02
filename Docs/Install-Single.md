@@ -1,4 +1,4 @@
-# JCNR Install (Single Kubernetes Node)手順
+![image](https://github.com/jnpr-jp-crdc/JCNR/assets/102126891/c21e6e2e-2d01-4692-9a47-ed3a2ab492e5)# JCNR Install (Single Kubernetes Node)手順
 - 本手順はKVM上にRHEL VMを1デプロイし、Single Node Kubernetes Clusterを構築し、JCNRをインストールする手順となります。
 - 本手順はJCNR 23.2をベースとしたインストール手順となります。
 
@@ -399,100 +399,97 @@ kubectl apply -f helmchart/cRPD_examples/node-annotation.yaml
 - CalicoがBGP 179 Portを使用しているため、JCNRで使用するBGP Portは178に設定
 helmchart/charts/jcnr-cni/files/jcnr-cni-custom-config.tmpl
 ```
-    apply-groups [custom];
-    system {
-        processes {
-            routing {
-                bgp {
-                    tcp-listen-port 178;
-                }
+apply-groups [custom];
+system {
+    processes {
+        routing {
+            bgp {
+                tcp-listen-port 178;
             }
         }
     }
-    groups {
-        custom {
-            interfaces {
-                lo0 {
-                    unit 0 {
-    		        {{if .Node.isoLoopbackAddr}}
-                        family iso {
-                            address {{.Node.isoLoopbackAddr}};
-                        }
-    		        {{end}}
-                        family inet {
-                            address {{.Node.IPv4LoopbackAddr}};
-                        }
+}
+groups {
+    custom {
+        interfaces {
+            lo0 {
+                unit 0 {
+                {{if .Params.isoLoopbackAddr}}
+                    family iso {
+                        address {{.Params.isoLoopbackAddr}};
                     }
-                }
-            }
-            routing-options {
-               router-id {{.Node.IPv4LoopbackAddr}}
-               route-distinguisher-id {{.Node.IPv4LoopbackAddr}}
-            }
-            protocols {
-                isis {
-                   interface all;
-                   {{if and .Env.SRGB_START_LABEL .Env.SRGB_INDEX_RANGE}}
-                   source-packet-routing {
-                       srgb start-label {{.Env.SRGB_START_LABEL}} index-range {{.Env.SRGB_INDEX_RANGE}};
-                       node-segment {
-                           {{if .Node.srIPv4NodeIndex}}
-                           ipv4-index {{.Node.srIPv4NodeIndex}};
-                           {{end}}
-                           {{if .Node.srIPv6NodeIndex}}
-                           ipv6-index {{.Node.srIPv6NodeIndex}};
-                           {{end}}
-                       }
-                   }
-                   {{end}}
-                   level 1 disable;
-                }
-                ldp {
-                    interface all;
-                }
-                mpls {
-                    interface all;
-                }
-                bgp {
-                    interface all;
-                }
-            }
-            policy-options {
-                # policy to signal dynamic UDP tunnel attributes to BGP routes
-                policy-statement udp-export {
-                    then community add udp;
-                }
-                community udp members encapsulation:0L:13;
-            }
-            protocols {
-                bgp {
-                    group jcnrbgp1 {
-                        type internal;
-                        local-address {{.Node.IPv4LoopbackAddr}};
-                        local-as {{.Node.BGPLocalAsn}};
-                        neighbor {{.Node.BGPIPv4Neighbor}};
-                        export udp-export;
-                        tcp-connect-port 178;
-                        family inet-vpn {
-                            unicast;
-                        }
-                        family inet6-vpn {
-                            unicast;
-                        }
-                    }
-                }
-            }
-            routing-options {
-                    dynamic-tunnels {
-                    dyn-tunnels {
-                        source-address {{.Node.IPv4LoopbackAddr}};
-                        udp;
-                        destination-networks 0.0.0.0/0;
+                {{end}}
+                    family inet {
+                        address {{.Params.IPv4LoopbackAddr}};
                     }
                 }
             }
         }
+        routing-options {
+            router-id {{.Params.IPv4LoopbackAddr}}
+            route-distinguisher-id {{.Params.IPv4LoopbackAddr}}
+        }
+        protocols {
+            isis {
+                interface all;
+                {{if and .Env.SRGB_START_LABEL .Env.SRGB_INDEX_RANGE}}
+                source-packet-routing {
+                    srgb start-label {{.Env.SRGB_START_LABEL}} index-range {{.Env.SRGB_INDEX_RANGE}};
+                    node-segment {
+                        {{if .Params.srIPv4NodeIndex}}
+                        ipv4-index {{.Params.srIPv4NodeIndex}};
+                        {{end}}
+                        {{if .Params.srIPv6NodeIndex}}
+                        ipv6-index {{.Params.srIPv6NodeIndex}};
+                        {{end}}
+                    }
+                }
+                {{end}}
+                level 1 disable;
+            }
+            ldp {
+                interface all;
+            }
+            mpls {
+                interface all;
+            }
+        }
+        policy-options {
+            # policy to signal dynamic UDP tunnel attributes to BGP routes
+            policy-statement udp-export {
+                then community add udp;
+            }
+            community udp members encapsulation:0L:13;
+        }
+        protocols {
+            bgp {
+                group jcnrbgp1 {
+                    type internal;
+                    local-address {{.Params.IPv4LoopbackAddr}};
+                    local-as {{.Params.BGPLocalAsn}};
+                    neighbor {{.Params.BGPIPv4Neighbor}};
+                    export udp-export;
+                    tcp-connect-port 178;
+                    family inet-vpn {
+                        unicast;
+                    }
+                    family inet6-vpn {
+                        unicast;
+                    }
+                }
+            }
+        }
+        routing-options {
+                dynamic-tunnels {
+                dyn-tunnels {
+                    source-address {{.Params.IPv4LoopbackAddr}};
+                    udp;
+                    destination-networks 0.0.0.0/0;
+                }
+            }
+        }
     }
+}
 ```
 
 ### JCNR デプロイ

@@ -69,6 +69,8 @@ Annotations:  cni.projectcalico.org/containerID: 702595e6eb2f05aaf5ca0b79c7fcc33
 Status:       Running
 --- snip ---
 ```
+
+POD IP/Route 確認
 ```
 [root@vrouter1-pod1 /]# ip a
 --- snip ---
@@ -96,3 +98,26 @@ fe80::/64 dev eth0 proto kernel metric 256 pref medium
 fe80::/64 dev net1 proto kernel metric 256 pref medium
 ```
 
+cRPD Config確認
+```
+set groups cni routing-instances vrouter1 instance-type virtual-router
+set groups cni routing-instances vrouter1 routing-options rib vrouter1.inet6.0 static route abcd::a00:4/128 qualified-next-hop abcd::a00:4 interface jvknet1-6103a34
+set groups cni routing-instances vrouter1 routing-options static route 10.0.0.9/32 qualified-next-hop 10.0.0.9 interface jvknet1-6103a34
+set groups cni routing-instances vrouter1 interface jvknet1-6103a34
+```
+
+vRouter VIF確認
+```
+bash-5.1# vif --list
+vif0/6      Ethernet: jvknet1-6103a34 NH: 19 MTU: 9160
+            Type:Virtual HWaddr:00:00:5e:00:01:00 IPaddr:10.0.0.9
+            IP6addr:abcd::a00:4
+            DDP: OFF SwLB: ON
+            Vrf:1 Mcast Vrf:1 Flags:PL3DVofProxyEr QOS:-1 Ref:11
+            RX port   packets:47 errors:0
+            RX queue errors to lcore 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+            RX packets:47  bytes:6069 errors:0
+            TX packets:2  bytes:172 errors:0
+            Drops:45
+            TX port   packets:2 errors:0
+```

@@ -19,9 +19,7 @@ spec:
     image: docker.io/centos
     command: [ "/bin/bash", "-c" ]
     args:
-      - ip route del default;
-        ip route add default via 10.0.0.1;
-        sleep infinity;
+      - sleep infinity;
     securityContext:
       privileged: true
       capabilities:

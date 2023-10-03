@@ -3,10 +3,11 @@
 - JCNR WorkerNode間のL2接続
 
 ## VRF vSwitch - Pod VLAN Access 
-<img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-vswitch1.png" width=400>
+<img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-vswitch1.png" width=600>
 
 ### Network Attachment Definition　作成
 [VRF vSwitch NAD JCNR1 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vswitch1-nad-jcnr1.yaml)
+
 [VRF vSwitch NAD JCNR2 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vswitch1-nad-jcnr2.yaml)
 
 

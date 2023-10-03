@@ -1,7 +1,7 @@
 # VRF - vSwitch : Pod Vlan Access
 - VRF Instance Type : Virtual Switch
 - JCNR WorkerNode間のL2接続
-- POD / JCNR vRouter間はVlan Access接続
+- POD / JCNR vRouter間はVlan Untag接続
 - VLANはJCNRデプロイ時にL2 Interfaceに指定したVLANしか使用できません
 
 ## VRF vSwitch - Pod VLAN Access 

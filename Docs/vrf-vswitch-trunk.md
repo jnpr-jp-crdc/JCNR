@@ -18,8 +18,7 @@
 #### NAD Option
 - InstanceName : "vswitch"のまま。変更不可
 - InstanceType : VRF Liteは"virtual-switch"を使用
-- bridgeDomain: BridgeDomain名。名称はbd + VLANIDとする
-- bridgeVlanId: VLAN ID
+- vlanIdList: VLAN ID
 - InterfaceType : 
   - veth : non DPDK Application接続時に使用
   - virtio : DPDK Application接続時に使用
@@ -29,9 +28,9 @@
   - whereabouts : 異なるHostでもユニークなIPをPODに付与 (https://github.com/k8snetworkplumbingwg/whereabouts)
 
 ### POD 作成
-[JCNR1 Pod1 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vswitch1-pod1-jcnr1.yaml)
+[JCNR1 Pod1 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vswitch2-pod1-jcnr1.yaml)
 
-[JCNR2 Pod2 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vswitch1-pod2-jcnr2.yaml)
+[JCNR2 Pod2 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vswitch2-pod2-jcnr2.yaml)
 
 #### Pod Interface
 - Secondary InterfaceにVRFが接続される

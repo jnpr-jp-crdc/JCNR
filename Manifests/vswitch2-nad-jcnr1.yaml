@@ -1,0 +1,34 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: vswitch2
+spec:
+  config: '{
+    "cniVersion":"0.4.0",
+    "name": "vswitch2",
+    "plugins": [
+      {
+        "type": "jcnr",
+        "args": {
+          "instanceName": "vswitch",
+          "instanceType": "virtual-switch",
+          "interfaceType": "veth",
+          "vlanIdList":"701, 702, 703"
+        },
+        "ipam": {
+          "type": "static",
+          "addresses":[
+            {
+              "address":"10.0.0.2/24",
+              "gateway":"10.0.0.1"
+            },
+            {
+              "address":"abcd::10.0.0.2/120",
+              "gateway":"abcd::10.0.0.1"
+            }
+          ]
+        },
+        "kubeConfig":"/etc/kubernetes/kubelet.conf"
+      }
+    ]
+  }'

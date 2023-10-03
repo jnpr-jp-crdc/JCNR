@@ -1,3 +1,5 @@
+動いてない。要確認
+
 # VRF - VRF Lite : POD Vlan Trunk
 - VRF Instance Type : Virtual Router
 - JCNR WorkerNode内でPOD間接続

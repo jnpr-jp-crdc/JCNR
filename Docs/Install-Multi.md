@@ -393,6 +393,7 @@ metadata:
         "srIPv4NodeIndex": "2001",
         "srIPv6NodeIndex": "3001",
         "BGPIPv4Neighbor": "1.1.1.2",
+        "BGPIPv4Neighbor": "1.1.1.3",
         "BGPLocalAsn": "64512"
     }'
 ---

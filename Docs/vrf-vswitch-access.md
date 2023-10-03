@@ -160,7 +160,7 @@ root@jcnr2> show configuration | display set
 --- snip ---
 set groups cni routing-instances vswitch instance-type virtual-switch
 set groups cni routing-instances vswitch bridge-domains bd300 vlan-id 300
-set groups cni routing-instances vswitch bridge-domains bd300 interface jvknet1-26814fb
+set groups cni routing-instances vswitch bridge-domains bd300 interface jvknet1-36dfb88
 ```
 
 cRPD L2 Default設定
@@ -195,4 +195,27 @@ vif0/6      Ethernet: jvknet1-a47ad95 MTU: 9160
             Drops:10
             TX queue  packets:38 errors:0
             TX port   packets:38 errors:0
+```
+```
+[root@jcnr2 yaml]# kubectl exec -it contrail-vrouter-masters-lxhhw -n contrail -- bash
+bash-5.1# vif --list
+vif0/6      Ethernet: jvknet1-36dfb88 MTU: 9160
+            Type:Virtual HWaddr:00:00:5e:00:01:00
+            DDP: OFF SwLB: ON
+            Vrf:0 Flags:L2Vof QOS:-1 Ref:8
+            RX port   packets:11 errors:0
+            RX queue errors to lcore 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+            Vlan Mode: Access  Vlan Id: 300  OVlan Id: 300
+            RX packets:16  bytes:1852 errors:1
+            TX packets:0  bytes:0 errors:0
+            Drops:12
+```
+
+POD間疎通確認
+```
+[root@vswitch1-pod1 /]# ping 10.0.0.3
+PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
+64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=0.261 ms
+64 bytes from 10.0.0.3: icmp_seq=2 ttl=64 time=0.242 ms
+64 bytes from 10.0.0.3: icmp_seq=3 ttl=64 time=0.221 ms
 ```

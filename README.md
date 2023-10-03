@@ -3,8 +3,9 @@
 XXXXXX
 
 # チュートリアル
-- [JCNR Install (Single Node K8S Cluster)](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Install-Single.md)
-- [JCNR Install (Multi Node K8S Cluster)](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Install-Multi.md)
+- JCNR Install
+  - [Single Node K8S Cluster](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Install-Single.md)
+  - [Multi Node K8S Cluster](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Install-Multi.md)
 
 - JCNR CNI Mode
   - L2

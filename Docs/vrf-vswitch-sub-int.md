@@ -1,11 +1,11 @@
-動いてない。要確認
+使用用途不明
 
 # VRF - vSwitch : Pod Vlan Sub Interface
 - VRF Instance Type : Virtual Switch
 - JCNR WorkerNode間のL2接続
-- POD / JCNR vRouter間はVlan Tag接続　(1 vSwitch 1 Vlan Interface)
+- POD / JCNR vRouter間はVlan Tag接続　
 - POD VLAN InterfaceへのIP Assign　可能
-- VLANはJCNRデプロイ時にL2 Interfaceに指定したVLANしか使用できません
+- JCNRに設定されるSub InterfaceはL3のためスイッチングしない
 
 ## VRF vSwitch - Pod VLAN Sub Interface
 <img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-vswitch3.png" width=800>
@@ -440,8 +440,6 @@ vif0/8      Virtual: jvknet1-5c.200 Vlan(o/i)(,S): 200/200 NH: 24 MTU: 1514
 
 POD間疎通確認
 ```
-[root@vswitch2-pod1 /]# ping 71.0.0.2
-PING 71.0.0.2 (71.0.0.2) 56(84) bytes of data.
-64 bytes from 71.0.0.2: icmp_seq=1 ttl=64 time=0.544 ms
-64 bytes from 71.0.0.2: icmp_seq=2 ttl=64 time=0.240 ms
+[root@vswitch3-pod1 /]# ping 10.0.0.3
+疎通不可
 ```

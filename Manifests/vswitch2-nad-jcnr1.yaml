@@ -13,10 +13,11 @@ spec:
           "instanceName": "vswitch",
           "instanceType": "virtual-switch",
           "interfaceType": "veth",
-          "vlanIdList":"701, 702, 703"
+          "vlanIdList":"100, 200"
         },
         "ipam": {
           "type": "static",
+          "capabilities":{"ips":true},
           "addresses":[
             {
               "address":"10.0.0.2/24",

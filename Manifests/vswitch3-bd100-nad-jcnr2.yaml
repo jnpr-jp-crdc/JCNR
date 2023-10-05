@@ -1,0 +1,36 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: vswitch3-bd100
+spec:
+  config: '{
+    "cniVersion":"0.4.0",
+    "name": "vswitch3-bd100",
+    "plugins": [
+      {
+        "type": "jcnr",
+        "args": {
+          "instanceName": "vswitch",
+          "instanceType": "virtual-switch",
+          "bridgeDomain": "bd100",
+          "bridgeVlanId": "100",
+          "parentInterface": "net1",
+          "interface": "net1.100"
+        },
+        "ipam": {
+          "type": "static",
+          "addresses":[
+            {
+              "address":"10.0.0.3/24",
+              "gateway":"10.0.0.1"
+            },
+            {
+              "address":"abcd::10.0.0.3/120",
+              "gateway":"abcd::10.0.0.1"
+            }
+          ]
+        },
+        "kubeConfig":"/etc/kubernetes/kubelet.conf"
+      }
+    ]
+  }'

@@ -6,8 +6,15 @@ metadata:
     k8s.v1.cni.cncf.io/networks: |
       [
         {
-          "name": "vswitch1",
+          "name": "vswitch1-bd100",
           "interface":"net1",
+          "cni-args": {
+            "interfaceType":"veth"
+          }
+        },
+        {
+          "name": "vswitch1-bd200",
+          "interface":"net2",
           "cni-args": {
             "interfaceType":"veth"
           }

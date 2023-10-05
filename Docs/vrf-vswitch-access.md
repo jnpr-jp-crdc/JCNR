@@ -5,7 +5,7 @@
 - VLANはJCNRデプロイ時にL2 Interfaceに指定したVLANしか使用できません
 
 ## VRF vSwitch - Pod VLAN Access 
-<img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-vswitch1.png" width=600>
+<img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-vswitch1.png" width=800>
 
 ### Network Attachment Definition　作成
 [VRF vSwitch BD100 NAD JCNR1 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vswitch1-nad-bd100-jcnr1.yaml)

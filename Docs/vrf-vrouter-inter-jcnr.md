@@ -4,7 +4,7 @@
 - POD / JCNR vRouter間はL3接続
 
 ## VRF Lite - Pod Vlan Access
-<img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-vrouter1.png" width=400>
+<img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-vrouter1.png" width=800>
 
 ### Network Attachment Definition　作成
 [VRF Lite NAD JCNR1 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vrouter1-nad-jcnr1.yaml)

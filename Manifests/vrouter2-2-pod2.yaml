@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vrouter2-2-pod2
+  annotations:
+    k8s.v1.cni.cncf.io/networks: |
+      [
+        {
+          "name": "vrouter2-2",
+          "interface":"net1",
+          "cni-args": {
+            "interfaceType":"veth"
+          }
+        }
+      ]
+spec:
+  containers:
+  - name: vrouter2-2-pod2
+    image: docker.io/centos
+    command: [ "/bin/bash", "-c" ]
+    args:
+      - sleep infinity;
+    securityContext:
+      privileged: true
+      capabilities:
+        add:
+          - NET_ADMIN

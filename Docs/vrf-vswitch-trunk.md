@@ -4,7 +4,7 @@
 - POD / JCNR vRouter間はVlan Trunk接続
 - PODへのIP Assign不可
 
-## VRF vSwitch - Pod VLAN Access 
+## VRF vSwitch - Pod VLAN Trunk
 <img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-vswitch2.png" width=600>
 
 ### Network Attachment Definition　作成

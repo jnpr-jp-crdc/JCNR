@@ -7,7 +7,7 @@
 - POD VLAN InterfaceへのIP Assign　可能
 - VLANはJCNRデプロイ時にL2 Interfaceに指定したVLANしか使用できません
 
-## VRF vSwitch - Pod VLAN Access 
+## VRF vSwitch - Pod VLAN Sub Interface
 <img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-vswitch3.png" width=800>
 
 ### Network Attachment Definition　作成

@@ -256,6 +256,11 @@ set routing-instances vswitch bridge-domains bd705 vlan-id 705
 set routing-instances vswitch interface ens5
 ```
 
+cRPD Bridge Domain Mac Table 確認
+```
+エントリなし
+```
+
 vRouter VIF確認
 ```
 [root@jcnr1]# kubectl exec -it contrail-vrouter-masters-flnlk -n contrail -- bash

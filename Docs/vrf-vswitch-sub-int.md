@@ -11,17 +11,21 @@
 <img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-vswitch3.png" width=600>
 
 ### Network Attachment Definition　作成
-[VRF vSwitch NAD JCNR1 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vswitch3-nad-jcnr1.yaml)
+[VRF vSwitch BD100 NAD JCNR1 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vswitch3-bd100-nad-jcnr1.yaml)
 
-[VRF vSwitch NAD JCNR2 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vswitch3-nad-jcnr2.yaml)
+[VRF vSwitch BD200 NAD JCNR1 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vswitch3-bd200-nad-jcnr1.yaml)
 
+[VRF vSwitch BD100 NAD JCNR2 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vswitch3-bd100-nad-jcnr2.yaml)
 
-
+[VRF vSwitch BD200 NAD JCNR2 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vswitch3-bd200-nad-jcnr2.yaml)
 
 #### NAD Option
 - InstanceName : "vswitch"のまま。変更不可
 - InstanceType : "virtual-switch"を使用
-- vlanIdList: VLAN ID
+- bridgeDomain : BridgeDomain名
+- bridgeVlanId : VlanID
+- parentInterface : PODのParent Interface名
+- interface : PodのSub Interface名
 - InterfaceType : 
   - veth : non DPDK Application接続時に使用
   - virtio : DPDK Application接続時に使用
@@ -31,47 +35,63 @@
   - whereabouts : 異なるHostでもユニークなIPをPODに付与 (https://github.com/k8snetworkplumbingwg/whereabouts)
 
 ### POD 作成
-[JCNR1 Pod1 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vswitch2-pod1-jcnr1.yaml)
+[JCNR1 Pod1 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vswitch3-pod1-jcnr1.yaml)
 
-[JCNR2 Pod2 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vswitch2-pod2-jcnr2.yaml)
+[JCNR2 Pod2 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vswitch3-pod2-jcnr2.yaml)
 
 #### Pod Interface
 - Secondary InterfaceにVRFが接続される
 - IP AddressはNADで指定した方式に従い払い出される
 ```
-[root@jcnr1 yaml]# kubectl describe pod vswitch2-pod1
-Name:         vswitch2-pod1
+[root@jcnr1 yaml]# kubectl describe pod vswitch3-pod1
+Name:         vswitch3-pod1
 Namespace:    default
 Priority:     0
 Node:         jcnr1/172.27.115.12
-Start Time:   Tue, 03 Oct 2023 04:22:33 -0400
+Start Time:   Thu, 05 Oct 2023 01:12:09 -0400
 Labels:       <none>
-Annotations:  cni.projectcalico.org/containerID: c6475f0237f252f9fafda7b8adea57cf5228c26abedd6e365cd8e42545c39375
-              cni.projectcalico.org/podIP: 172.30.79.27/32
-              cni.projectcalico.org/podIPs: 172.30.79.27/32
+Annotations:  cni.projectcalico.org/containerID: 89a595de2cc83b61bf096696a199790f0b780a9ea5029fa4883d12c9ba3588f6
+              cni.projectcalico.org/podIP: 172.30.79.45/32
+              cni.projectcalico.org/podIPs: 172.30.79.45/32
               k8s.v1.cni.cncf.io/network-status:
                 [{
                     "name": "k8s-pod-network",
                     "ips": [
-                        "172.30.79.27"
+                        "172.30.79.45"
                     ],
                     "default": true,
                     "dns": {}
                 },{
-                    "name": "default/vswitch2",
-                    "interface": "net1",
+                    "name": "default/vswitch3-bd100",
+                    "interface": "net1.100",
                     "ips": [
                         "10.0.0.2",
                         "abcd::a00:2"
                     ],
-                    "mac": "02:00:00:CC:1F:78",
+                    "mac": "02:00:00:25:9E:CF",
+                    "dns": {}
+                },{
+                    "name": "default/vswitch3-bd200",
+                    "interface": "net1.200",
+                    "ips": [
+                        "20.0.0.2",
+                        "abcd::1400:2"
+                    ],
+                    "mac": "02:00:00:0A:13:E3",
                     "dns": {}
                 }]
               k8s.v1.cni.cncf.io/networks:
                 [
                   {
-                    "name": "vswitch2",
-                    "interface":"net1",
+                    "name": "vswitch3-bd100",
+                    "interface": "net1.100",
+                    "cni-args": {
+                      "interfaceType":"veth"
+                    }
+                  },
+                  {
+                    "name": "vswitch3-bd200",
+                    "interface": "net1.200",
                     "cni-args": {
                       "interfaceType":"veth"
                     }

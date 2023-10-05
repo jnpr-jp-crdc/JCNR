@@ -2,7 +2,6 @@
 - VRF Instance Type : Virtual Switch
 - JCNR WorkerNode間のL2接続
 - POD / JCNR vRouter間はVlan Access接続
-- VLANはJCNRデプロイ時にL2 Interfaceに指定したVLANしか使用できません
 
 ## VRF vSwitch - Pod VLAN Access 
 <img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-vswitch1.png" width=800>
@@ -219,7 +218,16 @@ set groups cni routing-instances vswitch bridge-domains bd200 interface jvknet2-
 
 cRPD L2 Default設定
 - JCNRデプロイ時に指定したInterface VLAN設定が以下の設定の通り反映されている
+- 下記以外のBridgeDomain/VLANIDを使用する場合は、下記を編集
 ```
+set interfaces ens5 native-vlan-id 100
+set interfaces ens5 unit 0 family bridge interface-mode trunk
+set interfaces ens5 unit 0 family bridge vlan-id-list 100
+set interfaces ens5 unit 0 family bridge vlan-id-list 200
+set interfaces ens5 unit 0 family bridge vlan-id-list 300
+set interfaces ens5 unit 0 family bridge vlan-id-list 400
+set interfaces ens5 unit 0 family bridge vlan-id-list 700-705
+set interfaces ens5 unit 0 family bridge ce-facing
 set routing-instances vswitch instance-type virtual-switch
 set routing-instances vswitch bridge-domains bd100 vlan-id 100
 set routing-instances vswitch bridge-domains bd200 vlan-id 200

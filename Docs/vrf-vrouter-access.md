@@ -1,7 +1,7 @@
-# VRF - VRF Lite : POD Vlan Access
+# VRF - VRF Lite : JCNR間Routing
 - VRF Instance Type : Virtual Router
-- JCNR WorkerNode内でPOD間接続
-- POD / JCNR vRouter間はVlan Access接続
+- JCNR WorkerNode間でPOD間L3接続
+- POD / JCNR vRouter間はL3接続
 
 ## VRF Lite - Pod Vlan Access
 <img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-vrouter1.png" width=400>

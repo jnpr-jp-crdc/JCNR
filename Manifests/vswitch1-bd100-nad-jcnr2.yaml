@@ -1,11 +1,11 @@
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
-  name: vswitch1
+  name: vswitch1-bd100
 spec:
   config: '{
     "cniVersion":"0.4.0",
-    "name": "vswitch1",
+    "name": "vswitch1-bd100",
     "plugins": [
       {
         "type": "jcnr",
@@ -13,8 +13,8 @@ spec:
           "instanceName": "vswitch",
           "instanceType": "virtual-switch",
           "interfaceType": "veth",
-          "bridgeDomain": "bd300",
-          "bridgeVlanId": "300"
+          "bridgeDomain": "bd100",
+          "bridgeVlanId": "100"
         },
         "ipam": {
           "type": "static",

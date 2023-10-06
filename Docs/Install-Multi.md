@@ -587,3 +587,201 @@ vRouter Login
 ```
 kubectl exec -n contrail -it contrail-vrouter-masters-XXXX -- bash
 ```
+
+### JCNR 初期Config
+- MasterNodeにRR設定(set groups custom protocols bgp group jcnrbgp1 cluster 1.1.1.1)を要追加
+```
+root@jcnr-master> show configuration | display set
+set version 20230905.075640_builder.r1366729
+set groups base apply-flags omit
+set groups base apply-macro ht jcnr
+set groups base system root-authentication encrypted-password "$6$hrCofocE5Ywd7A53$vjAI/yHbqv3V5W0UCryrdgsQNvuwc.2NQfhRvUbgyFjRCQD6SNMolQsv4CSB.5cLZrsMmIIvZM/M9BMEOlmQE0"
+set groups base system commit xpath
+set groups base system commit constraints direct-access
+set groups base system commit notification configuration-diff-format xml
+set groups base system scripts action max-datasize 256m
+set groups base system scripts language python3
+set groups base system services ssh root-login allow
+set groups base system services ssh port 24
+set groups base system services extension-service request-response grpc clear-text address 127.0.0.1
+set groups base system services extension-service request-response grpc clear-text port 50051
+set groups base system services extension-service request-response grpc skip-authentication
+set groups base system services netconf ssh
+set groups base system syslog host 127.0.0.1 any any
+set groups base system syslog host 127.0.0.1 port 50055
+set groups base system syslog host 127.0.0.1 transport udp
+set groups base system syslog host 127.0.0.1 structured-data
+set groups base system syslog file test any any
+set groups base system syslog source-address 127.0.0.1
+set groups base system license keys key "JUNOS892191212 aeaqie alakap hs6c2a eqaaad 5adsqo zm7quo 3hqrmy hg74fs lzcbra wvagfc zxvq7a nwwdy2 63hajk u26llp mbk4wv sidbdz"
+set groups base interfaces irb unit 0 mac 48:5a:0d:10:4c:b0
+set groups base routing-options resolution rib :gribi.inet6.0 inet6-resolution-ribs :gribi.inet6.0
+set groups base routing-options forwarding-table channel vrouter protocol protocol-type gRPC
+set groups base routing-options forwarding-table channel vrouter protocol destination 127.0.0.1:50052
+set groups custom interfaces lo0 unit 0 family inet address 1.1.1.1/32
+set groups custom interfaces lo0 unit 0 family iso address 49.0004.1000.0000.0001.00
+set groups custom policy-options policy-statement udp-export then community add udp
+set groups custom policy-options community udp members encapsulation:0L:13
+set groups custom routing-options route-distinguisher-id 1.1.1.1
+set groups custom routing-options router-id 1.1.1.1
+set groups custom routing-options dynamic-tunnels dyn-tunnels source-address 1.1.1.1
+set groups custom routing-options dynamic-tunnels dyn-tunnels udp
+set groups custom routing-options dynamic-tunnels dyn-tunnels destination-networks 1.1.1.3/32
+set groups custom routing-options dynamic-tunnels dyn-tunnels destination-networks 1.1.1.2/32
+set groups custom protocols bgp group jcnrbgp1 type internal
+set groups custom protocols bgp group jcnrbgp1 local-address 1.1.1.1
+set groups custom protocols bgp group jcnrbgp1 family inet-vpn unicast
+set groups custom protocols bgp group jcnrbgp1 family inet6-vpn unicast
+set groups custom protocols bgp group jcnrbgp1 export udp-export
+set groups custom protocols bgp group jcnrbgp1 local-as 64512
+set groups custom protocols bgp group jcnrbgp1 neighbor 1.1.1.3
+set groups custom protocols bgp group jcnrbgp1 neighbor 1.1.1.2
+set groups custom protocols bgp group jcnrbgp1 tcp-connect-port 178
+set groups custom protocols isis interface all
+set groups custom protocols isis interface ens3 disable
+set groups custom protocols isis source-packet-routing srgb start-label 400000
+set groups custom protocols isis source-packet-routing srgb index-range 4000
+set groups custom protocols isis source-packet-routing node-segment ipv4-index 2001
+set groups custom protocols isis source-packet-routing node-segment ipv6-index 3001
+set groups custom protocols isis level 1 disable
+set groups custom protocols ldp interface all
+set groups custom protocols ldp interface ens3 disable
+set groups custom protocols mpls interface all
+set groups custom protocols mpls interface ens3 disable
+set groups cni apply-flags omit
+set groups cni apply-macro ht jcnr
+set groups internal apply-flags omit
+set groups internal apply-macro ht jcnr
+set groups internal system commit xpath
+set groups internal system commit constraints direct-access
+set groups internal system commit notification configuration-diff-format xml
+set groups internal system scripts language python3
+set groups internal event-options policy save_config events UI_COMMIT_COMPLETED
+set groups internal event-options policy save_config then execute-commands commands "start shell sh command /config/scripts/save-config.sh"
+set groups internal event-options policy save_config then execute-commands output-filename save_config
+deactivate groups internal event-options policy save_config then execute-commands output-filename
+set groups internal event-options policy save_config then execute-commands destination local
+deactivate groups internal event-options policy save_config then execute-commands destination local
+set groups internal event-options policy save_config then execute-commands output-format text
+set groups internal event-options destinations local archive-sites /var/tmp
+deactivate groups internal event-options destinations
+set apply-groups custom
+set apply-groups base
+set apply-groups internal
+set apply-groups cni
+set system processes routing bgp tcp-listen-port 178
+set interfaces ens5 native-vlan-id 100
+set interfaces ens5 unit 0 family bridge interface-mode trunk
+set interfaces ens5 unit 0 family bridge vlan-id-list 100
+set interfaces ens5 unit 0 family bridge vlan-id-list 200
+set interfaces ens5 unit 0 family bridge vlan-id-list 300
+set interfaces ens5 unit 0 family bridge vlan-id-list 700-705
+set interfaces ens5 unit 0 family bridge ce-facing
+set routing-instances vswitch instance-type virtual-switch
+set routing-instances vswitch bridge-domains bd100 vlan-id 100
+set routing-instances vswitch bridge-domains bd200 vlan-id 200
+set routing-instances vswitch bridge-domains bd300 vlan-id 300
+set routing-instances vswitch bridge-domains bd700 vlan-id 700
+set routing-instances vswitch bridge-domains bd701 vlan-id 701
+set routing-instances vswitch bridge-domains bd702 vlan-id 702
+set routing-instances vswitch bridge-domains bd703 vlan-id 703
+set routing-instances vswitch bridge-domains bd704 vlan-id 704
+set routing-instances vswitch bridge-domains bd705 vlan-id 705
+set routing-instances vswitch interface ens5
+```
+```
+root@jcnr-worker1> show configuration | display set
+set version 20230905.075640_builder.r1366729
+set groups base apply-flags omit
+set groups base apply-macro ht jcnr
+set groups base system root-authentication encrypted-password "$6$8RX4oEt8q8kEz6C6$AJtuLSDuP9hwi1PsPV9QHKdb8tezBLUCW6QA3j1HHRUo3NHPTCpq98YtT0VDG0liyUSTLw5.dVQYevN9pfJv4/"
+set groups base system commit xpath
+set groups base system commit constraints direct-access
+set groups base system commit notification configuration-diff-format xml
+set groups base system scripts action max-datasize 256m
+set groups base system scripts language python3
+set groups base system services ssh root-login allow
+set groups base system services ssh port 24
+set groups base system services extension-service request-response grpc clear-text address 127.0.0.1
+set groups base system services extension-service request-response grpc clear-text port 50051
+set groups base system services extension-service request-response grpc skip-authentication
+set groups base system services netconf ssh
+set groups base system syslog host 127.0.0.1 any any
+set groups base system syslog host 127.0.0.1 port 50055
+set groups base system syslog host 127.0.0.1 transport udp
+set groups base system syslog host 127.0.0.1 structured-data
+set groups base system syslog file test any any
+set groups base system syslog source-address 127.0.0.1
+set groups base system license keys key "JUNOS892191212 aeaqie alakap hs6c2a eqaaad 5adsqo zm7quo 3hqrmy hg74fs lzcbra wvagfc zxvq7a nwwdy2 63hajk u26llp mbk4wv sidbdz"
+set groups base interfaces irb unit 0 mac 48:5a:0d:d0:5d:bf
+set groups base routing-options resolution rib :gribi.inet6.0 inet6-resolution-ribs :gribi.inet6.0
+set groups base routing-options forwarding-table channel vrouter protocol protocol-type gRPC
+set groups base routing-options forwarding-table channel vrouter protocol destination 127.0.0.1:50052
+set groups custom interfaces lo0 unit 0 family inet address 1.1.1.2/32
+set groups custom interfaces lo0 unit 0 family iso address 49.0004.1000.0000.0002.00
+set groups custom policy-options policy-statement udp-export then community add udp
+set groups custom policy-options community udp members encapsulation:0L:13
+set groups custom routing-options route-distinguisher-id 1.1.1.2
+set groups custom routing-options router-id 1.1.1.2
+set groups custom routing-options dynamic-tunnels dyn-tunnels source-address 1.1.1.2
+set groups custom routing-options dynamic-tunnels dyn-tunnels udp
+set groups custom routing-options dynamic-tunnels dyn-tunnels destination-networks 1.1.1.1/32
+set groups custom protocols bgp group jcnrbgp1 type internal
+set groups custom protocols bgp group jcnrbgp1 local-address 1.1.1.2
+set groups custom protocols bgp group jcnrbgp1 family inet-vpn unicast
+set groups custom protocols bgp group jcnrbgp1 family inet6-vpn unicast
+set groups custom protocols bgp group jcnrbgp1 export udp-export
+set groups custom protocols bgp group jcnrbgp1 local-as 64512
+set groups custom protocols bgp group jcnrbgp1 neighbor 1.1.1.1
+set groups custom protocols bgp group jcnrbgp1 tcp-connect-port 178
+set groups custom protocols isis interface all
+set groups custom protocols isis interface ens3 disable
+set groups custom protocols isis source-packet-routing srgb start-label 400000
+set groups custom protocols isis source-packet-routing srgb index-range 4000
+set groups custom protocols isis source-packet-routing node-segment ipv4-index 2002
+set groups custom protocols isis source-packet-routing node-segment ipv6-index 3002
+set groups custom protocols isis level 1 disable
+set groups custom protocols ldp interface all
+set groups custom protocols ldp interface ens3 disable
+set groups custom protocols mpls interface all
+set groups custom protocols mpls interface ens3 disable
+set groups cni apply-flags omit
+set groups cni apply-macro ht jcnr
+set groups internal apply-flags omit
+set groups internal apply-macro ht jcnr
+set groups internal system commit xpath
+set groups internal system commit constraints direct-access
+set groups internal system commit notification configuration-diff-format xml
+set groups internal system scripts language python3
+set groups internal event-options policy save_config events UI_COMMIT_COMPLETED
+set groups internal event-options policy save_config then execute-commands commands "start shell sh command /config/scripts/save-config.sh"
+set groups internal event-options policy save_config then execute-commands output-filename save_config
+deactivate groups internal event-options policy save_config then execute-commands output-filename
+set groups internal event-options policy save_config then execute-commands destination local
+deactivate groups internal event-options policy save_config then execute-commands destination local
+set groups internal event-options policy save_config then execute-commands output-format text
+set groups internal event-options destinations local archive-sites /var/tmp
+deactivate groups internal event-options destinations
+set apply-groups custom
+set apply-groups base
+set apply-groups internal
+set system processes routing bgp tcp-listen-port 178
+set interfaces ens5 native-vlan-id 100
+set interfaces ens5 unit 0 family bridge interface-mode trunk
+set interfaces ens5 unit 0 family bridge vlan-id-list 100
+set interfaces ens5 unit 0 family bridge vlan-id-list 200
+set interfaces ens5 unit 0 family bridge vlan-id-list 300
+set interfaces ens5 unit 0 family bridge vlan-id-list 700-705
+set interfaces ens5 unit 0 family bridge ce-facing
+set routing-instances vswitch instance-type virtual-switch
+set routing-instances vswitch bridge-domains bd100 vlan-id 100
+set routing-instances vswitch bridge-domains bd200 vlan-id 200
+set routing-instances vswitch bridge-domains bd300 vlan-id 300
+set routing-instances vswitch bridge-domains bd700 vlan-id 700
+set routing-instances vswitch bridge-domains bd701 vlan-id 701
+set routing-instances vswitch bridge-domains bd702 vlan-id 702
+set routing-instances vswitch bridge-domains bd703 vlan-id 703
+set routing-instances vswitch bridge-domains bd704 vlan-id 704
+set routing-instances vswitch bridge-domains bd705 vlan-id 705
+set routing-instances vswitch interface ens5
+```

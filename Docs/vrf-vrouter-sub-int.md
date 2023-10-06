@@ -6,7 +6,7 @@
 - POD / JCNR vRouter間はVlan Trunk接続
 
 ## VRF Lite - Pod Vlan Trunk
-<img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-vrouter2.png" width=600>
+<img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-vrouter3.png" width=600>
 
 ### Network Attachment Definition　作成
 [VRF Lite NAD Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vrouter2-nad.yaml)

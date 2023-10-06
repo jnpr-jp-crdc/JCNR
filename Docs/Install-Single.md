@@ -315,8 +315,8 @@ chmod 700 get_helm.sh
 ### JCNR Imageの取得
 - Software Download SiteからDownloadまたはJuniper社へお問い合わせください
 ```
-tar xzvf Juniper_Cloud_Native_Router_23.2.tgz
-cd Juniper_Cloud_Native_Router_23.2
+tar xzvf Juniper_Cloud_Native_Router_23.3.tgz
+cd Juniper_Cloud_Native_Router_23.3
 docker load -i images/jcnr-images.tar.gz
 ```
 
@@ -371,31 +371,42 @@ data:
 kubectl apply -f secrets/jcnr-secrets.yaml
 ```
 
-### JCNR Node Annotation設定
-- Node AnnotationはJCNR Node毎に異なるパラメータを定義し、JCNRデプロイ時にConfigurationに反映
-helmchart/cRPD_examples/node-annotation.yaml
+### JCNR Configmap設定
+- 本ConfigmapはJCNR Node毎に異なるパラメータを定義し、JCNRデプロイ時にConfigurationに反映
+helmchart/cRPD_examples/jcnr-params-configmap.yaml
 ```
----
 apiVersion: v1
-kind: Node
+kind: ConfigMap
 metadata:
-  name: jcnr1
-  annotations:
-    jcnr.juniper.net/params: '{
-        "isoLoopbackAddr": "49.0004.1000.0000.0001.00",
-        "IPv4LoopbackAddr": "1.1.1.1",
-        "srIPv4NodeIndex": "2001",
-        "srIPv6NodeIndex": "3001",
-        "BGPIPv4Neighbor": "1.1.1.2",
-        "BGPLocalAsn": "64512"
-    }'
+  name: jcnr-params
+  namespace: jcnr
+data:
+  jcnr1: |
+    {
+      "isoLoopbackAddr": "49.0004.1000.0000.0001.00",
+      "IPv4LoopbackAddr": "1.1.1.1",
+      "srIPv4NodeIndex": "2001",
+      "srIPv6NodeIndex": "3001",
+      "BGPIPv4Neighbor": "1.1.1.2",
+      "BGPLocalAsn": "64512"
+    }
 ```
 ```
-kubectl apply -f helmchart/cRPD_examples/node-annotation.yaml
+kubectl create -f helmchart/cRPD_examples/jcnr-params-configmap.yaml
+```
+
+Configmapを適用するためにNodeにLabelを付与
+```
+kubectl label nodes jcnr1 jcnr.juniper.net/params-profile=jcnr1
+```
+
+Bug対応
+```
+kubectl annotate nodes jcnr1 jcnr.juniper.net/params-
 ```
 
 ### JCNR Custom Config File
-- Node Annotationで指定したパラメータを元に、JCNRデプロイ時に設定する初期Configuration
+- Configmapで指定したパラメータを元に、JCNRデプロイ時に設定する初期Configuration
 - CalicoがBGP 179 Portを使用しているため、JCNRで使用するBGP Portは178に設定
 helmchart/charts/jcnr-cni/files/jcnr-cni-custom-config.tmpl
 ```

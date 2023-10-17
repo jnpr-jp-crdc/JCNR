@@ -1,9 +1,9 @@
-# VRF - VRF L3VPN : JCNR間Routing
+# VRF - VRF L3VPN / MPLSoUDP : JCNR間Routing
 - VRF Instance Type : vrf
 - JCNR WorkerNode間でPOD間MPLSoUDPによるL3接続
 - POD / JCNR vRouter間はL3接続
 
-## VRF L3VPN - JCNR間Routing
+## VRF L3VPN / MPLSoUDP - JCNR間Routing
 <img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-vrf1.png" width=800>
 
 ### Network Attachment Definition　作成

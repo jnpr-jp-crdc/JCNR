@@ -8,6 +8,7 @@
 
 ## JCNR Custom Template編集
 - Install時に使用した"jcnr-cni-custom-config.tmpl"はSR-MPLSをベースにした設定となっているため、EVPN用に変更し、JCNRを再デプロイ
+- 既にJCNRをInstall済みの場合、cRPD Configを直接編集も可
 
 jcnr-cni-custom-config.tmpl
 ```

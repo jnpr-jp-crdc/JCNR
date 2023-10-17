@@ -461,12 +461,6 @@ groups {
                 {{end}}
                 level 1 disable;
             }
-            ldp {
-                interface all;
-                interface ens3 {
-                    disable;
-                }
-            }
             mpls {
                 interface all;
                 interface ens3 {

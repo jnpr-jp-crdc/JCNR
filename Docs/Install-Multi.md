@@ -1,4 +1,4 @@
-![image](https://github.com/jnpr-jp-crdc/JCNR/assets/102126891/10e0bd65-4257-4358-819c-a51d29a65dfd)# JCNR Install (Multi Worker Node Kubernetes Cluster)手順
+# JCNR Install (Multi Worker Node Kubernetes Cluster)手順
 - 本手順はKVM上にRHEL VMを3台デプロイし、Multi Worker Node Kubernetes Clusterを構築し、JCNRをインストールする手順となります。
 - 本手順はJCNR 23.3をベースとしたインストール手順となります。
 - JCNR Master NodeがBGP RRとなる
@@ -487,12 +487,6 @@ groups {
                 }
                 {{end}}
                 level 1 disable;
-            }
-            ldp {
-                interface all;
-                interface ens3 {
-                    disable;
-                }
             }
             mpls {
                 interface all;

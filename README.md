@@ -13,6 +13,7 @@ XXXXXX
     - [VRF vSwitch - Pod Vlan Trunk](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/vrf-vswitch-trunk.md)
     - [VRF vSwitch - Pod Vlan Sub Interface](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/vrf-vswitch-sub-int.md)
     - [VRF vSwitch - MAC Filter](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/vrf-vswitch-mac-filter.md)
+    - VRF EVPN/VXLAN : 未サポート(NADで使用するVRF TypeにMacVRFが使用できないため)
       
   - L3
     - [VRF Lite - JCNR間接続](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/vrf-vrouter-inter-jcnr.md)

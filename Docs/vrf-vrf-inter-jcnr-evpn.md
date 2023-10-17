@@ -7,7 +7,7 @@
 <img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-evpn-vxlan.png" width=800>
 
 ## JCNR Custom Template編集
-- Install時に使用した"jcnr-cni-custom-config.tmpl"はMPLSoUDPをベースにした設定となっているため、EVPN用に変更し、JCNRを再デプロイ
+- Install時に使用した"jcnr-cni-custom-config.tmpl"はSR-MPLSをベースにした設定となっているため、EVPN用に変更し、JCNRを再デプロイ
 
 jcnr-cni-custom-config.tmpl
 ```

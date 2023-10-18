@@ -28,3 +28,4 @@ XXXXXX
     - L3 ACL : Roadmap
     - SRv6 : Roadmap
     - FlexArgo : Roadmap
+- JCNR CNF Mode (Transit Gateway)

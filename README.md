@@ -13,7 +13,9 @@ XXXXXX
     - [VRF vSwitch - Pod Vlan Trunk](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/vrf-vswitch-trunk.md)
     - [VRF vSwitch - Pod Vlan Sub Interface](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/vrf-vswitch-sub-int.md)
     - [VRF vSwitch - MAC Filter](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/vrf-vswitch-mac-filter.md)
-    - VRF EVPN/VXLAN : 未サポート(NADで使用するVRF TypeにMacVRFが使用できないため)
+    - VRF EVPN/VXLAN : Roadmap CY24 2H
+    - MPLS/E-LINE : Roadmap CY24 1H
+    - EVPN/E-LAN, E-LINE : Roadmap CY24 2H
       
   - L3
     - [VRF Lite - JCNR間接続](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/vrf-vrouter-inter-jcnr.md)
@@ -21,4 +23,7 @@ XXXXXX
     - [VRF Lite - Sub Interface](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/vrf-vrouter-sub-int.md)
     - [VRF L3VPN/SR-MPLS - JCNR間接続](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/vrf-vrf-inter-jcnr-srmpls.md)
     - [VRF L3VPN/MPLSoUDP - JCNR間接続](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/vrf-vrf-inter-jcnr-mplsoudp.md)
-    - [VRF EVPN/VXLAN - JCNR間接続](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/vrf-vrf-inter-jcnr-evpn.md)
+    - [VRF EVPN/VXLAN Type5 - JCNR間接続](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/vrf-vrf-inter-jcnr-evpn.md)
+    - L3 ACL : Roadmap CY24 1H
+    - SRv6 : Roadmap CY24 1H
+    - FlexArgo : 

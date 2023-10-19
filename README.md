@@ -29,3 +29,4 @@ XXXXXX
     - SRv6 : Roadmap
     - FlexArgo : Roadmap
 - JCNR CNF Mode (Transit Gateway)
+    - [VRF L3VPN/SR-MPLS](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/cnf-srmpls.md)

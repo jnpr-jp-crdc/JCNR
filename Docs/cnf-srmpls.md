@@ -3,7 +3,7 @@
 - JCNR間でSR-MPLSによるL3接続
 
 ## CNF Mode - SR-MPLS
-<img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/cnf-sr-mpls.png" width=800>
+<img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/cnf-srmpls.png" width=800>
 
 cRPD Config確認
 ```

@@ -1,6 +1,15 @@
 # Juniper Cloud Native Router (JCNR) 概要
 
-XXXXXX
+Juniper Cloud Native Router (JCNR)は、コントロールプレーンにcRPD、データプレーンにContrail vRouterを使用したコンテナ型ルータです。
+
+オンプレ環境(K8S, OpenShift, Windriver)とクラウド環境(EKS, GCP, AKS)で利用でき、スペースやスペックが限られた環境においてハイパフォーマンスで高機能なスイッチング・ルーティング機能を提供します。
+
+JCNRでは２つの動作モードをサポート
+- CNI Mode
+  クラウドネイティブ環境においてSecondary CNIとして動作し、マニフェストファイル及びJUNOS CLIからRouting Instance(VRF)の作成、PODへの仮想NWへのアタッチが可能です。
+  
+- CNF Mode (Transit Gateway)
+  User Application(POD)を使用せず、JCNRをコンテナ環境におけるコンテナルータとして稼働させることが可能です。
 
 # チュートリアル
 - JCNR Install

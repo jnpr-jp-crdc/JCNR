@@ -6,10 +6,14 @@ Juniper Cloud Native Router (JCNR)は、コントロールプレーンにcRPD、
 
 JCNRでは２つの動作モードをサポート
 - CNI Mode
+  
   クラウドネイティブ環境においてSecondary CNIとして動作し、マニフェストファイル及びJUNOS CLIからRouting Instance(VRF)の作成、PODへの仮想NWへのアタッチが可能です。
+<img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/cni-mode.png" width=800>
   
 - CNF Mode (Transit Gateway)
+  
   User Application(POD)を使用せず、JCNRをコンテナ環境におけるコンテナルータとして稼働させることが可能です。
+<img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/cnf-mode.png" width=800>
 
 # チュートリアル
 - JCNR Install

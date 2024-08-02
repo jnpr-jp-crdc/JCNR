@@ -526,6 +526,7 @@ set apply-groups l2-config
 
 ### JCNR Configlet設定
 - ConfigletはJCNR Node毎に異なるパラメータを定義し、JCNRデプロイ後にConfigurationに追加、変更、削除が可能
+- 以下はSR-MPLSのサンプル設定
 /root/configlet-jcnr-master.yaml
 ```
 apiVersion: configplane.juniper.net/v1
@@ -545,7 +546,6 @@ spec:
     set protocols isis source-packet-routing node-segment ipv4-index 1
     set protocols isis source-packet-routing srgb start-label 400000
     set protocols isis source-packet-routing srgb index-range 99999
-    set protocols ldp interface ens4
     set protocols mpls interface ens4
     set protocols bgp group jcnrbgp1 type internal
     set protocols bgp group jcnrbgp1 local-address 1.1.1.1
@@ -553,14 +553,8 @@ spec:
     set protocols bgp group jcnrbgp1 neighbor 1.1.1.2
     set protocols bgp group jcnrbgp1 neighbor 1.1.1.3
     set protocols bgp group jcnrbgp1 cluster 1.1.1.1
-    set protocols bgp group jcnrbgp1 export udp-export
     set protocols bgp group jcnrbgp1 family inet-vpn unicast
     set protocols bgp group jcnrbgp1 family inet6-vpn unicast
-    set policy-options policy-statement udp-export then community add udp
-    set policy-options community udp members encapsulation:0L:13
-    set routing-options dynamic-tunnels dyn-tunnels source-address 1.1.1.1
-    set routing-options dynamic-tunnels dyn-tunnels udp
-    set routing-options dynamic-tunnels dyn-tunnels destination-networks 0.0.0.0/0
   crpdSelector:
     matchLabels:
       kubernetes.io/hostname: jcnr-master

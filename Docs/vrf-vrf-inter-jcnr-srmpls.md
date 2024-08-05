@@ -6,7 +6,7 @@
 ## VRF L3VPN / SR-MPLS - JCNR間Routing
 <img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-srmpls.png" width=800>
 
-### Configlet
+### JCNR Configlet
 [JCNR1 Configlet Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/configlet-srmpls-jcnr1.yaml)
 
 [JCNR2 Configlet Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/configlet-srmpls-jcnr2.yaml)

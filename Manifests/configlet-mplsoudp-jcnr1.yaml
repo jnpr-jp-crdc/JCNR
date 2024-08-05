@@ -1,0 +1,27 @@
+apiVersion: configplane.juniper.net/v1
+kind: Configlet
+metadata:
+  name: configlet-jcnr-master
+  namespace: jcnr
+spec:
+  config: |-
+    set interfaces lo0 unit 0 family iso address 49.0001.0000.0000.0001.00
+    set interfaces lo0 unit 0 family inet address 1.1.1.1/32
+    set interfaces ens4 unit 0 family inet address 192.168.1.1/24
+    set interfaces ens4 unit 0 family iso
+    set routing-options router-id 1.1.1.1
+    set routing-options route-distinguisher-id 1.1.1.1
+    set protocols isis interface ens4
+    set protocols isis interface lo0.0
+    set protocols bgp group jcnrbgp1 type internal
+    set protocols bgp group jcnrbgp1 local-address 1.1.1.1
+    set protocols bgp group jcnrbgp1 local-as 65000
+    set protocols bgp group jcnrbgp1 neighbor 1.1.1.2
+    set protocols bgp group jcnrbgp1 family inet-vpn unicast
+    set protocols bgp group jcnrbgp1 family inet6-vpn unicast
+    set protocols bgp group jcnrbgp1 export udp-export
+    set policy-options policy-statement udp-export then community add udp
+    set policy-options community udp members encapsulation:0L:13
+    set routing-options dynamic-tunnels dyn-tunnels source-address 1.1.1.1
+    set routing-options dynamic-tunnels dyn-tunnels udp
+    set routing-options dynamic-tunnels dyn-tunnels destination-networks 0.0.0.0/0

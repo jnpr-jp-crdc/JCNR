@@ -7,6 +7,9 @@
 <img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-vrf1.png" width=800>
 
 ## JCNR Configlet
+[JCNR1 Configlet Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/configlet-mplsoudp-jcnr1.yaml)
+
+[JCNR2 Configlet Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/configlet-mplsoudp-jcnr2.yaml)
 
 ### Network Attachment Definition　作成
 [VRF L3VPN NAD JCNR1 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vrf1-nad-jcnr1.yaml)

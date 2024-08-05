@@ -8,6 +8,7 @@
 
 ### Configlet
 [JCNR1 Configlet Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/configlet-srmpls-jcnr1.yaml)
+
 [JCNR2 Configlet Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/configlet-srmpls-jcnr2.yaml)
 
 

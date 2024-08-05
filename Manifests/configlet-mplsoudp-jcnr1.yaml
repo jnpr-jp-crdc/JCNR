@@ -1,7 +1,7 @@
 apiVersion: configplane.juniper.net/v1
 kind: Configlet
 metadata:
-  name: configlet-jcnr-master
+  name: configlet-jcnr1
   namespace: jcnr
 spec:
   config: |-

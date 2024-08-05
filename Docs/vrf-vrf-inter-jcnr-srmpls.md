@@ -6,6 +6,8 @@
 ## VRF L3VPN / SR-MPLS - JCNR間Routing
 <img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-srmpls.png" width=800>
 
+### Configlet
+
 ### Network Attachment Definition　作成
 [VRF L3VPN NAD JCNR1 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vrf1-nad-jcnr1.yaml)
 

@@ -7,68 +7,9 @@
 <img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-evpn-vxlan.png" width=800>
 
 ## JCNR Configlet
-- Install時に使用した"jcnr-cni-custom-config.tmpl"はSR-MPLSをベースにした設定となっているため、EVPN用に変更し、JCNRを再デプロイ
-- 既にJCNRをInstall済みの場合、cRPD Configを直接編集も可
+[JCNR1 Configlet Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/configlet-evpnvxlan-jcnr1.yaml)
 
-jcnr-cni-custom-config.tmpl
-```
-apply-groups [custom];
-system {
-    processes {
-        routing {
-            bgp {
-                tcp-listen-port 178;
-            }
-        }
-    }
-}
-groups {
-    custom {
-        interfaces {
-            lo0 {
-                unit 0 {
-                {{if .Params.isoLoopbackAddr}}
-                    family iso {
-                        address {{.Params.isoLoopbackAddr}};
-                    }
-                {{end}}
-                    family inet {
-                        address {{.Params.IPv4LoopbackAddr}};
-                    }
-                }
-            }
-        }
-        routing-options {
-            router-id {{.Params.IPv4LoopbackAddr}}
-            route-distinguisher-id {{.Params.IPv4LoopbackAddr}}
-        }
-        protocols {
-            isis {
-                interface all;
-                interface ens3 {
-                    disable;
-                }
-                level 1 disable;
-            }
-        }
-        protocols {
-            bgp {
-                group jcnrbgp1 {
-                    type internal;
-                    local-address {{.Params.IPv4LoopbackAddr}};
-                    local-as {{.Params.BGPLocalAsn}};
-                    neighbor {{.Params.BGPIPv4Neighbor}};
-                    tcp-connect-port 178;
-                    family evpn {
-                        signaling;
-                    }
-                }
-            }
-        }
-    }
-}
-```
-
+[JCNR2 Configlet Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/configlet-evpnvxlan-jcnr2.yaml)
 
 ### Network Attachment Definition　作成
 [VRF NAD JCNR1 Sample Yaml](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Manifests/vrf1-nad-jcnr1.yaml)
@@ -254,21 +195,6 @@ set groups cni routing-instances vrf1 routing-options rib vrf1.inet6.0 static ro
 set groups cni routing-instances vrf1 routing-options static route 20.0.0.5/32 qualified-next-hop 20.0.0.5 interface jvknet1-b12d2e9
 set groups cni routing-instances vrf1 interface jvknet1-b12d2e9
 set groups cni routing-instances vrf1 vrf-target target:64512:1
-```
-
-cRPD EVPN Type5 Route設定追加
-```
-root@jcnr1#
-set routing-instances vrf1 protocols evpn ip-prefix-routes advertise direct-nexthop
-set routing-instances vrf1 protocols evpn ip-prefix-routes encapsulation vxlan
-set routing-instances vrf1 protocols evpn ip-prefix-routes vni 1000
-```
-
-```
-root@jcnr2#
-set routing-instances vrf1 protocols evpn ip-prefix-routes advertise direct-nexthop
-set routing-instances vrf1 protocols evpn ip-prefix-routes encapsulation vxlan
-set routing-instances vrf1 protocols evpn ip-prefix-routes vni 2000
 ```
 
 cRPD Route確認

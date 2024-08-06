@@ -6,7 +6,7 @@
 ## VRF EVPN/VXLAN - JCNR間Routing
 <img src="https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Images/vrf-evpn-vxlan.png" width=800>
 
-## JCNR Custom Template編集
+## JCNR Configlet
 - Install時に使用した"jcnr-cni-custom-config.tmpl"はSR-MPLSをベースにした設定となっているため、EVPN用に変更し、JCNRを再デプロイ
 - 既にJCNRをInstall済みの場合、cRPD Configを直接編集も可
 

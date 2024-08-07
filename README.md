@@ -38,8 +38,8 @@ JCNRでは２つの動作モードをサポート
     - [VRF L3VPN/SR-MPLS - JCNR間接続](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/vrf-vrf-inter-jcnr-srmpls.md)
     - [VRF L3VPN/MPLSoUDP - JCNR間接続](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/vrf-vrf-inter-jcnr-mplsoudp.md)
     - [VRF EVPN/VXLAN Type5 - JCNR間接続](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/vrf-vrf-inter-jcnr-evpn.md)
+    - [VRF SRv6 - JCNR間接続](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/vrf-vrf-inter-jcnr-srv6.md)
     - L3 ACL : Roadmap
-    - SRv6 : Roadmap
     - FlexArgo : Roadmap
 - JCNR CNF Mode (Transit Gateway)
     - [VRF L3VPN/SR-MPLS](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/cnf-srmpls.md)

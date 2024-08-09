@@ -19,6 +19,7 @@ JCNRでは２つの動作モードをサポート
 - JCNR Install
   - [Single Node K8S Cluster](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Install-Single-24.2.md)
   - [Multi Node K8S Cluster](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Install-Multi-24.2.md)
+  - [Single Node K8S Cluster with cSRX](https://github.com/jnpr-jp-crdc/JCNR/blob/main/Docs/Install-Single-cSRX.md)
 
 - JCNR CNI Mode
   - L2
